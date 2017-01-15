@@ -25,7 +25,8 @@ def getPrintHtmlEncoding(url):
 def getServerAddr(url):
      # 得到三个服务器地址
      print url
-     addr = r""
+     # TODO 已不能用iss作为匹配规则
+     addr = r"\w+\.iss\.\w"
      t = re.compile(addr)
      addr = re.findall(t, url)
      print addr
@@ -34,6 +35,7 @@ def getServerAddr(url):
 def getPort(url):
      # 得到三个端口
      tmp = "端口".decode('utf-8').encode('gbk')
+     # TODO 最好不用数字匹配
      port = r":\d+</h4>"
      port = tmp + port
      t = re.compile(port)
@@ -51,6 +53,7 @@ def getPort(url):
 
 def getPasswd(url):
      # 得到密码
+     # TODO 最好不用数字匹配
      passwd = r":\d{8}<"
      t = re.compile(passwd)
      passwd = re.findall(t, url)
