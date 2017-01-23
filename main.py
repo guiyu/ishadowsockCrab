@@ -67,7 +67,6 @@ def getEncryptWay(url):
      EncryptWay = re.findall(t, url)
      return EncryptWay
 
-
 html = getHtml("http://www.ishadowsocks.me/")
 html = getPrintHtmlEncoding(html)
 
@@ -84,4 +83,11 @@ if __name__ == '__main__':
          print info[2].decode('utf-8').encode('gbk'), passwd[i]
          print info[-1].decode('utf-8').encode('gbk'), EncryptWay[i]
          print
+     # TODO change local
+     fp = open(name="～/.meow/rc", mode='a')
+     fp.write("\n")
+     # fp.writelines("# 添加ISS代理配置\n")
+     fp.writelines("proxy = ss://" + EncryptWay[0] + ":" + passwd[0] + "@" + serverAddr[0] + ":" + port[0])
+     fp.flush()
+     fp.close()
      raw_input("> ")
