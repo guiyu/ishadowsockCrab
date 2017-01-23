@@ -101,4 +101,8 @@ if __name__ == '__main__':
      fp.flush()
      fp.close()
 
+     # 重启MEOW服务
+     os.system("ps aux|grep MEOW|awk '{print $2}'|xargs kill -9")
+     os.system("MEOW &")
+
      raw_input("> ")
