@@ -24,9 +24,7 @@ def getPrintHtmlEncoding(url):
 
 def getServerAddr(url):
      # 得到三个服务器地址
-     print url
-     # TODO 已不能用iss作为匹配规则
-     addr = r"\w+\.iss\.\w"
+     addr = r"\w+\.ssx\.host"
      t = re.compile(addr)
      addr = re.findall(t, url)
      print addr
@@ -34,10 +32,7 @@ def getServerAddr(url):
 
 def getPort(url):
      # 得到三个端口
-     tmp = "端口".decode('utf-8').encode('gbk')
-     # TODO 最好不用数字匹配
-     port = r":\d+</h4>"
-     port = tmp + port
+     port = r"端口:\d+"
      t = re.compile(port)
      port = re.findall(t, url)
      # 测试port列表中变量的编码类型
