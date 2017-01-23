@@ -3,6 +3,7 @@ import re
 import sys
 import urllib
 import chardet
+import os
 
 def getHtml(url):
      page = urllib.urlopen(url)
@@ -83,11 +84,21 @@ if __name__ == '__main__':
          print info[2].decode('utf-8').encode('gbk'), passwd[i]
          print info[-1].decode('utf-8').encode('gbk'), EncryptWay[i]
          print
-     # TODO change local
-     fp = open(name="～/.meow/rc", mode='a')
-     fp.write("\n")
+
+     # 重新设置代理
+     lines = []
+     fp = open(name=os.environ['HOME'] + "/.meow/rc", mode='r')
+     for line in fp.xreadlines():
+         if not re.search('proxy', line):
+             lines.append(line)
+     fp.close()
+
+     fp = open(name=os.environ['HOME'] + "/.meow/rc", mode='w')
+     fp.writelines(lines)
      # fp.writelines("# 添加ISS代理配置\n")
-     fp.writelines("proxy = ss://" + EncryptWay[0] + ":" + passwd[0] + "@" + serverAddr[0] + ":" + port[0])
+     key = 2
+     fp.writelines("proxy = ss://" + EncryptWay[key] + ":" + passwd[key] + "@" + serverAddr[key] + ":" + port[key])
      fp.flush()
      fp.close()
+
      raw_input("> ")
